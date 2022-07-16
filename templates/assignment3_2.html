@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% set title='assignment3_2' %}
+{% block title %}{{ title }} Page {% endblock %}
+
+{% block content %}
+    <div id="container">
+        {% if session['user_name'] %}
+            <div id="contant_header">
+                <h1>Hi, {{session['user_name']}} Aka {{session['nic_name']}} </h1>
+            </div>
+        {% else %}
+            <div id="contant_header">
+                <h1>login</h1>
+                <h2>Login Form:</h2>
+                <form action="/assignment3_2" method="post">
+                    <input type="text" name="user_name" placeholder="User Name">
+                    <input type="password" name="password" placeholder="Password">
+                    <input type="submit">
+                </form>
+                <h2>{{message}}</h2>
+            </div>
+        {% endif %}
+        <div id="main">
+            <h1>Search users by name (hint: Omri, Gal)</h1>
+            <form method="GET" action="/assignment3_2">
+            <input type="text" name="name" placeholder="Name">
+            <input type="submit" value="Search">
+            </form>
+        </div>
+        {% if name %}
+            <h3></h3>
+            <h3>Name: {{name}} <br> Email: {{ email }} <br> NickName: {{nic_name}}</h3>
+            <h3></h3>
+        {% endif %}
+
+        {% if all_users %}
+        <h1></h1>
+            <ol>
+                {% for k, v in all_users.items() %}
+                    <li><h3>Name: {{v['name']}}, Email: {{v['email']}}, NickName: {{v['nic_name']}}</h3></li>
+                {% endfor %}
+            </ol>
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block content2 %}
+<h5>can you see me?</h5>
+{% endblock %}

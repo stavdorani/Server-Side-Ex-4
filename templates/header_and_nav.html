@@ -1,0 +1,19 @@
+<header class="page-header">
+    <h1 id="pHeader">Web Course Exercise!</h1>
+</header>
+
+<nav class="innerHeader">
+    <ul class="navigation">
+        <a id="hom" href="/"><li>My Home page</li></a>
+        <a id="con" href="/contact" target="_self"><li>Contact us</li></a>
+        <a id="ass31" href="/assignment3_1" target="_self"><li>Rock Climbing page</li></a>
+        <a id="ass4" href="/assignment_4" target="_self"><li>Users</li></a>
+        <a id="ass32" href="/assignment3_2" target="_self"><li>Login & Search page</li></a>
+        {% if session['user_name'] %}
+            <a id="logout" href="/log_out" target="_self"><li>Log Out from {{session['user_name']}}</li></a>
+            <h3>Hi there, {{session['nic_name']}}</h3>
+        {% endif %}
+
+
+    </ul>
+</nav>

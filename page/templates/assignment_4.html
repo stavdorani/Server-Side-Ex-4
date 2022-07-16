@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% set title='assignment_4' %}
+{% block title %}{{ title }} Page {% endblock %}
+
+{% block content %}
+    <h1>Users Page</h1>
+
+    <div class="container">
+        <h2>Part B.4 front form</h2>
+        <form id="front_form">
+            <input class="input" type="number" name="id" placeholder="insert id" required>
+            <input type="submit">
+        </form>
+    </div>
+    <div class="container">
+        <h2 style="color: forestgreen" hidden id="front_form_name"></h2>
+        <h2 style="color: forestgreen" hidden id="front_form_email"></h2>
+    </div>
+
+    <div class="container">
+        <h2>Part B.4 back form</h2>
+        <form id="back_form" action="/assignment_4/outer_source" method="post">
+            <input class="input" type="number" name="id" placeholder="insert id" required>
+            <input type="submit">
+        </form>
+    </div>
+
+    <div class="container">
+    {% if reqres_api_users %}
+        <h2 style="color: forestgreen" id="front_form_first_name">{{ reqres_api_users["first_name"] }} {{ reqres_api_users["first_name"] }}</h2>
+        <h2 style="color: forestgreen" id="front_form_email">{{ reqres_api_users["email"] }}</h2>
+    {% endif %}
+    </div>
+
+    <div class="container">
+        <h2 style="color: azure"><b>Insertion form</b></h2>
+        <form action="/insert_user" method="post">
+            <input type="text" name="name" placeholder="Insert Name">
+            <input type="email" name="email" placeholder="Email">
+            <input type="text" name="nic_name" placeholder="NickName">
+            <input type="password" name="password" placeholder="Insert password">
+            {% if email_in_use %}
+                <h2>email in use already</h2>
+            {% else %}
+                <input type="submit" value="Insert">
+            {% endif %}
+        </form>
+    </div>
+
+    <div class="container">
+    <h2 style="color: azure"><b>Update Email form</b></h2>
+    <form action="/update_user_email" method="post">
+        <input type="text" name="user_id" placeholder="User Id"> <br>
+        <input type="email" name="email" placeholder="Update Email">
+        <input type="submit" value="Update">
+        {% if message_up_email %}
+            <h2 style="color: forestgreen">{{ message_up_email }}</h2>
+        {% endif %}
+    </form>
+    </div>
+
+    <div class="container">
+        <h2 style="color: azure"><b>Update Name form</b></h2>
+        <form action="/update_user_name" method="post">
+            <input type="text" name="user_id" placeholder="User Id"> <br>
+            <input type="text" name="name" placeholder="Insert Name">
+            <input type="submit" value="Update">
+            {% if message_up_name %}
+                <h2 style="color: forestgreen">{{ message_up_name }}</h2>
+            {% endif %}
+        </form>
+    </div>
+
+    <div class="container">
+        <h2 style="color: azure"><b>Deletion form</b></h2>
+        <form action="/delete_user" method="post">
+            <input type="text" name="user_id" placeholder="User Id">
+            <input type="submit" value="Delete">
+            {% if message_del %}
+                <h2 style="color: forestgreen">{{ message_del }}</h2>
+            {% endif %}
+        </form>
+    </div>
+
+    <div class="container" >
+        <h2><b>List of users</b></h2>
+        {% for user in users %}
+            <div class="main"  style="border: 2px solid forestgreen; ">
+                <h3 style="text-align: center">User Id: {{ user.id }}</h3>
+                <h3 style="text-align: center">{{ user.name }}</h3>
+                <h3 style="text-align: center">Email: {{ user.email }}</h3>
+                <h3 style="text-align: center">NickName: {{ user.nic_name }}</h3>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block content2 %}
+    <h5>can you see me?</h5>
+{% endblock %}

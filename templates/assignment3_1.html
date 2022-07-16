@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% set title='assignment3_1' %}
+{% block title %}{{ title | default ('web course', true)}} Page {% endblock %}
+
+{% block content %}
+    <div class="container" id="container">
+        <div id="contant_header" style="border: 20px solid; padding: 2vh; margin: 22px;">
+            <h1>Rock Climbing sites</h1>
+        </div>
+        <div class="content" id="content">
+            <h2>climbing sites for {{climbing_style}}</h2>
+            {% if climbing_style == 'Bolder' %}
+                {% for site in bolder_climbing_sites %}
+                    <h3><li><a href={{bolder_climbing_sites[site]}}>{{site | default ('site', true) | upper() }}</a></li></h3>
+                {% endfor %}
+
+            {% else %}
+                {% for site in sport_climbing_sites %}
+                    <h3><li><a href={{sport_climbing_sites[site]}}>{{site | default ('site', true) | lower() }}</a></li></h3>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block content2 %}
+    {{super()}}
+{% endblock %}

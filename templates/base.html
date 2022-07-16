@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='mystyle.css')}}">
+</head>
+<body>
+    {% include('header_and_nav.html') %}
+
+    {% block content %}
+            <h1>Message from BASE Page!</h1>
+    {% endblock %}
+
+    {% block content2 %}
+            <h1>Message from BASE Page!</h1>
+    {% endblock %}
+
+
+    {% include('footer.html') %}
+
+    <script src="{{url_for('static', filename='myScript.js')}}"></script>
+</body>
+</html>
